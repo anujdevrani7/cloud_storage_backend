@@ -1,0 +1,1 @@
+this is for to checking the express.static middleware
