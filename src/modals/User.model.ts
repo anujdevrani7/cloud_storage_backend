@@ -2,7 +2,6 @@
 // Production-ready Mongoose model for users
 
 import mongoose, { Document, Schema,Types } from 'mongoose';
-import { v4 as uuidv4 } from 'uuid';
 
 export interface IUser extends Document {
     // userUniqueId: string;
@@ -15,7 +14,7 @@ export interface IUser extends Document {
     email: string;
 }
 
-const UserSchema: Schema = new Schema<IUser>(
+const userModel: Schema = new Schema<IUser>(
     {
         // userUniqueId: {
         //     type: String,
@@ -59,5 +58,5 @@ const UserSchema: Schema = new Schema<IUser>(
     }
 );
 
-const User = mongoose.model<IUser>('User', UserSchema);
+const User = mongoose.model<IUser>('User', userModel);
 export default User;

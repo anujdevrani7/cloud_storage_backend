@@ -5,6 +5,7 @@ import ErrorHandler from './middlewares/ErrorHandler';
 import testRouter from "./routers/test.router";
 import userRouter from "./routers/users";
 import storageRouter from "./routers/storage";
+import folderRouter from "./routers/folder";
 import { NextFunction } from 'express';
 import Constants from './constants/constants';
 
@@ -27,6 +28,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use(`${apiPrefix}/test`, testRouter);
 app.use(`${apiPrefix}/users`, userRouter);
 app.use(`${apiPrefix}/storage`, storageRouter);
+app.use(`${apiPrefix}/folder`, folderRouter);
 
 
 

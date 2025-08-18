@@ -4,6 +4,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import ErrorHandler from "./ErrorHandler";
+import { User } from "../../types/express";
 
 const isAuthentaticUser = (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies?.token || req.headers['authorization']?.replace('Bearer ', '');
@@ -14,7 +15,7 @@ const isAuthentaticUser = (req: Request, res: Response, next: NextFunction) => {
     }
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET!) ;
+        const decoded = jwt.verify(token, process.env.JWT_SECRET!)as User ;
         req.user = decoded;
 
         

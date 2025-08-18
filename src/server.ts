@@ -5,13 +5,15 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import app from './index';
+import { seedFileTypes } from "./migrations/seed-filetype"
 
 import connectDB from './dbConfig/index';
 
 const port = process.env.PORT || 3000;
 
 connectDB()
-    .then(() => {
+    .then(async () => {
+        await seedFileTypes()
         const server = app.listen(port, () => {
             console.log(`Server is running on http://localhost:${port}`);
         });

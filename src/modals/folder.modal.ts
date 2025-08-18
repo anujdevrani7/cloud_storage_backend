@@ -11,7 +11,7 @@ export interface Ifolder extends Document {
 }
 
 
-const folderSchema = new Schema<Ifolder>({
+const folderModel = new Schema<Ifolder>({
     userId: {
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -32,5 +32,5 @@ const folderSchema = new Schema<Ifolder>({
         timestamps: true
     })
 
-const Folder = mongoose.model<Ifolder>('Folder', folderSchema);
+const Folder = mongoose.model<Ifolder>('Folder', folderModel);
 export default Folder;

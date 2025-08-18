@@ -9,9 +9,9 @@ export const testing = asyncHandler(async (req: Request, res: Response, next: Ne
 
     if (flag) {
         // Success response
-        return res.status(200).json(new ApiResponse(true,"ok report",{
-            data:{
-                message:"ok "
+        return res.status(200).json(new ApiResponse("ok report", {
+            data: {
+                message: "ok "
             }
         }));
     } else {

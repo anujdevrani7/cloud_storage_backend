@@ -42,14 +42,14 @@ export const addNewUser = asyncHandler(async (req: Request, res: Response, next:
         Body: "", // zero-byte object
     });
     await s3Client.send(command);
-    return res.status(200).json(new ApiResponse(true, "user added successfully"))
+    return res.status(200).json(new ApiResponse("user added successfully"))
 });
 
 export const getUser = asyncHandler(async (req, res, next) => {
     console.log("value of the user is  : ", req.user)
 
     const data = await User.find({})
-    return res.status(200).json(new ApiResponse(true, "user fetched successfully", data))
+    return res.status(200).json(new ApiResponse("user fetched successfully", data))
 })
 
 export const login = asyncHandler(async (req, res, next) => {
@@ -93,7 +93,7 @@ export const login = asyncHandler(async (req, res, next) => {
     // const userObj = user.toObject();
     // delete userObj.password;
 
-    return res.status(200).json(new ApiResponse(true, "Login successful", token));
+    return res.status(200).json(new ApiResponse("Login successful", token));
 });
 export const signUp = asyncHandler(async (req, res, next) => {
 

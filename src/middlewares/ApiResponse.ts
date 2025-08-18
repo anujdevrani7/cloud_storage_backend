@@ -5,13 +5,12 @@ class ApiResponse<T = any> {
     public success: boolean;
     public message: string;
     public data?: T;
-    public errors?: any;
+   
 
-    constructor(success: boolean, message: string, data?: T, errors?: any) {
-        this.success = success;
+    constructor( message: string, data?: T) {
+        this.success = true;
         this.message = message;
         this.data = data;
-        this.errors = errors;
     }
 }
 
