@@ -24,37 +24,38 @@ export const getObject = asyncHandler(async (req, res, next) => {
 })
 
 export const generateSignedUrl = asyncHandler(async (req, res, next) => {
-    const userId=req.user?.id;
+    const userId = req.user?.id;
     const { fileName, mimeType, folderId }: generateSignedUrlSchemaType = req.body;
     // also take contentlength
     // first check is the file name should not same in the current directory 
 
-    if(folderId ){
+    if (folderId) {
         const checkFolder = await Folder.findOne({ _id: folderId, userId }, { projection: { _id: 1 } });
         if (!checkFolder) {
             return next(new ErrorHandler("folder not found", 404));
         }
     }
 
-    const checkUniqueFileName = await Files.findOne({ originalName:fileName, folderId})
+    const checkUniqueFileName = await Files.findOne({ originalName: fileName, folderId })
     if (checkUniqueFileName) {
-        return next(new ErrorHandler("file with the same name exist ",400));
+        return next(new ErrorHandler("file with the same name exist ", 400));
     }
 
 
     const typeOfFile = mapMimeTypeToFileType(mimeType);
-    
-    const checkType=await fileTypes.findOne({fileType:typeOfFile},{id:1});
-    if(!checkType){
-        return next (new ErrorHandler("invalid file type ",400))
+
+    const checkType = await fileTypes.findOne({ fileType: typeOfFile }, { id: 1 });
+    if (!checkType) {
+        return next(new ErrorHandler("invalid file type ", 400))
     }
-    console.log("value of the type of the file is  : ",folderId)
-    
+    console.log("value of the type of the file is  : ", folderId)
+
 
     const fileNameS3 = req.user?.id + '/' + uuidv4() + fileName
     await Files.insertOne({
         fileName: fileNameS3,
-        fileTypeId:checkType.id,
+        fileTypeId: checkType.id,
+        userId: req.user?.id,
         folderId,
         // fileSize:, will complete when we will be sending reqeust from the browser 
         originalName: fileName,

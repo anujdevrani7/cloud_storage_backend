@@ -7,6 +7,7 @@ interface IfilesTypes extends Document {
 }
 interface Ifiles extends Document {
     folderId: Types.ObjectId;
+    userId: Types.ObjectId;
     fileTypeId: Types.ObjectId;
     fileSize: string
     originalName: string //the name of the actual file 
@@ -33,6 +34,11 @@ const fileModel = new Schema<Ifiles>({
         required: false,
         default: null
     },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
     fileTypeId: {
         type: Schema.Types.ObjectId,
         ref: "filetypes"
@@ -52,7 +58,7 @@ const fileModel = new Schema<Ifiles>({
     },
     isUploaded: {
         type: Boolean,
-        default:false
+        default: false
     }
 }, {
     timestamps: true

@@ -43,3 +43,12 @@ export const getFileFolder = asyncHandler(async (req, res, next) => {
 
 
 })
+
+
+export const getDashboardData=asyncHandler(async(req,res,next)=>{
+    const folderCount=await Folder.countDocuments({userId:req.user?.id})
+    const totalFiles=await Files.countDocuments({userId:req.user?.id})
+
+    
+    return res.status(200).json(new ApiResponse("dashboard data fetched successfully   : ",{folderCount,totalFiles}))
+})

@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import dotenv from "dotenv"
+import cors from "cors"
 import cookieParser from "cookie-parser"
 import ErrorHandler from './middlewares/ErrorHandler';
 import testRouter from "./routers/test.router";
@@ -13,7 +14,10 @@ import Constants from './constants/constants';
 dotenv.config();
 
 const app = express();
-
+app.use(cors({
+    origin:['http://localhost:5173'],
+    credentials:true
+}))
 app.use(express.static("public"))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))

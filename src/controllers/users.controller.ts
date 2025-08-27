@@ -46,9 +46,12 @@ export const addNewUser = asyncHandler(async (req: Request, res: Response, next:
 });
 
 export const getUser = asyncHandler(async (req, res, next) => {
-    console.log("value of the user is  : ", req.user)
+    
 
-    const data = await User.find({})
+    const data = await User.findOne({_id:req.user?.id})
+
+    console.log("value of the data is  : ",data)
+    console.log("value of teh cookie is  : ",req.user?.id)
     return res.status(200).json(new ApiResponse("user fetched successfully", data))
 })
 
@@ -98,3 +101,5 @@ export const login = asyncHandler(async (req, res, next) => {
 export const signUp = asyncHandler(async (req, res, next) => {
 
 })
+
+
